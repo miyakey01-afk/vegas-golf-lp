@@ -32,6 +32,7 @@ body{
   font-family:ui-rounded,"Hiragino Maru Gothic ProN",-apple-system,"Hiragino Sans",sans-serif;
   line-height:1.7;overflow-x:hidden;position:relative;
   box-shadow:0 0 80px rgba(0,0,0,.08);
+  word-break:auto-phrase;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;}
@@ -100,11 +101,11 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
 .rank-badge--1,.rank-badge--4{background:var(--sun);color:var(--ink);}
 .rank-badge--2,.rank-badge--3{background:var(--turf);}
 
-.mood-badge{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;
+.mood-badge{position:absolute;top:-12px;right:-22px;width:34px;height:34px;border-radius:50%;
   background:#FFF3C4;border:2px solid var(--sun);box-shadow:0 3px 8px rgba(14,41,32,.35);
   display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.mood-badge--left{right:auto;left:-14px;}
-.mood-badge--muted{border-color:var(--ink-soft);background:#E4EEE8;}
+.mood-badge--left{right:auto;left:-22px;}
+.mood-badge--muted{border-color:var(--sun);background:#F2EFE0;}
 .mood-badge img{width:82%;height:82%;object-fit:contain;display:block;}
 
 .num-badge{position:absolute;top:-10px;right:-6px;min-width:28px;height:28px;
@@ -147,6 +148,9 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
 .easy-card p:last-child{margin-bottom:0;}
 
 /* ===== セクション5：ギャラリー ===== */
+.gallery-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.gallery-head .section-title{margin-bottom:0;}
+.gallery-hint{font-size:11.5px;font-weight:800;color:var(--ink-soft);opacity:.8;white-space:nowrap;}
 .gallery-scroll{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;padding:6px 20px 14px;}
 .gallery-item{flex:0 0 auto;width:250px;height:auto;border-radius:18px;
@@ -395,7 +399,10 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
   <!-- 5. 画面ギャラリー -->
   <section class="section" id="gallery" style="padding-left:0;padding-right:0;">
     <div class="container">
-      <h2 class="section-title">画面ギャラリー</h2>
+      <div class="gallery-head">
+        <h2 class="section-title">画面ギャラリー</h2>
+        <span class="gallery-hint">← 横にスクロール →</span>
+      </div>
     </div>
     <div class="gallery-scroll">
       <img class="gallery-item" src="assets/shot-01.webp" width="720" height="1564" alt="アプリ画面: ホーム" loading="lazy" decoding="async">
@@ -405,7 +412,6 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
       <img class="gallery-item" src="assets/shot-05.webp" width="720" height="1564" alt="アプリ画面: ラウンド結果" loading="lazy" decoding="async">
       <img class="gallery-item" src="assets/shot-06.webp" width="720" height="1564" alt="アプリ画面: スコアボード" loading="lazy" decoding="async">
       <img class="gallery-item" src="assets/shot-07.webp" width="720" height="1564" alt="アプリ画面: 統計" loading="lazy" decoding="async">
-      <img class="gallery-item" src="assets/shot-08.webp" width="720" height="1564" alt="アプリ画面: Pro機能" loading="lazy" decoding="async">
     </div>
   </section>
 
@@ -435,7 +441,10 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
         </li>
         <li class="step">
           <span class="step-num">3</span>
-          <div class="step-body"><p>あとはスコアを入力するだけ</p></div>
+          <div class="step-body">
+            <p>あとはスコアを入力するだけ</p>
+            <img class="step-icon" src="assets/flag.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
+          </div>
         </li>
       </ol>
     </div>
