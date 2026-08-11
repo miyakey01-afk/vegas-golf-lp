@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ラスベガス・ゴルフ・ゲーム｜ゴルフはスコアを競うだけじゃない。</title>
+<meta name="description" content="4人で回るなら「ラスベガス」という遊び方があります。1ホールごとにチームが組み替わり、スコアが悪かった人ほど上手い人と組める。複雑な計算は全部アプリが。">
+<meta name="apple-itunes-app" content="app-id=6768002657">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" href="assets/icon-180.png" type="image/png">
+<meta name="theme-color" content="#1A7D56">
+<meta property="og:title" content="ラスベガス・ゴルフ・ゲーム｜ゴルフはスコアを競うだけじゃない。">
+<meta property="og:description" content="4人で回るなら「ラスベガス」という遊び方があります。スコアが悪い人ほど上手い人と組める。計算は全部アプリが。">
+<meta property="og:image" content="OG_IMAGE_URL_PLACEHOLDER">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="SITE_URL_PLACEHOLDER">
+<meta property="og:type" content="website"><meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* ===== 変数・リセット ===== */
+:root{
+  --turf:#1A7D56; --turf-dark:#0E5C3E; --sun:#FFD93D; --sun-glow:rgba(255,217,61,.55);
+  --sky-1:#7EC8E3; --sky-2:#B8E0D2; --ink:#0E2920; --ink-soft:#1E4938; --paper:#FFFDF5;
+  --card-bg:rgba(255,255,255,.72);
+  --shadow-card:0 8px 24px rgba(14,41,32,.10);
+  --radius-lg:20px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{background:#EAE6D9;-webkit-text-size-adjust:100%;}
+body{
+  margin:0 auto;max-width:520px;background:var(--paper);color:var(--ink);
+  font-family:ui-rounded,"Hiragino Maru Gothic ProN",-apple-system,"Hiragino Sans",sans-serif;
+  line-height:1.7;overflow-x:hidden;position:relative;
+  box-shadow:0 0 80px rgba(0,0,0,.08);
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+h1,h2,h3,p,ul,ol,li{margin:0;padding:0;line-break:strict;}
+a,button,summary{-webkit-tap-highlight-color:transparent;}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;}
+
+/* ===== 共通パーツ ===== */
+.container{padding:0 20px;}
+.section{padding:52px 0;}
+.section-title{font-size:21px;font-weight:900;color:var(--ink);margin:0 0 10px;text-wrap:balance;}
+.section-lead{font-size:14.5px;line-height:1.8;color:var(--ink-soft);margin:0 0 26px;}
+.card{background:var(--card-bg);border:1px solid rgba(255,255,255,.6);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:20px;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 26px;border-radius:999px;font-weight:900;font-size:15.5px;
+  text-decoration:none;font-family:inherit;border:none;cursor:pointer;
+  transition:transform .15s ease;}
+.btn--primary{background:linear-gradient(135deg,#FFD93D 0%,#FFB300 100%);color:var(--ink);
+  box-shadow:0 10px 26px rgba(255,179,0,.4),0 0 0 3px rgba(255,255,255,.35);}
+.btn--primary:active{transform:scale(.97);}
+.btn--block{display:flex;width:100%;}
+
+/* ===== ヒーロー ===== */
+.hero{position:relative;padding-top:30px;padding-bottom:40px;text-align:center;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(255,217,61,.35) 0,transparent 45%),
+    linear-gradient(180deg,#7EC8E3 0%,#B8E0D2 38%,#1A7D56 78%,#0E5C3E 100%);
+}
+.hero__logo{width:172px;height:auto;margin:0 auto 18px;display:block;}
+.hero__title{font-size:25px;line-height:1.45;font-weight:900;color:#fff;
+  text-shadow:0 3px 14px rgba(14,41,32,.45);margin:0 0 12px;}
+.hero__sub{font-size:14.5px;line-height:1.75;font-weight:700;color:rgba(255,255,255,.97);
+  max-width:290px;margin:0 auto 20px;}
+.hero__cta{margin-bottom:16px;}
+.trust-badges{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 26px;}
+.trust-badge{font-size:11px;font-weight:800;color:#fff;background:rgba(14,41,32,.4);
+  border:1px solid rgba(255,255,255,.32);padding:6px 11px;border-radius:999px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);white-space:nowrap;}
+.hero__device-wrap{padding:0 26px;}
+.hero__device{width:76%;max-width:300px;height:auto;margin:0 auto;border-radius:32px;
+  box-shadow:0 22px 50px rgba(14,41,32,.5),0 0 0 6px rgba(255,255,255,.15);}
+
+/* ===== 図解パーツ（共通） ===== */
+.diagram-card{background:var(--card-bg);border:1px solid rgba(255,255,255,.6);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:20px 16px;margin-bottom:16px;}
+.diagram-card__title{font-size:15px;font-weight:900;color:var(--turf-dark);margin:0 0 16px;text-align:center;}
+.diagram-card__body{font-size:13.5px;line-height:1.75;color:var(--ink-soft);margin:16px 0 0;text-align:center;}
+.diagram-card__body strong{color:var(--turf-dark);}
+
+.teams-row{display:flex;align-items:center;justify-content:center;gap:8px;}
+.team-group{display:flex;gap:6px;background:rgba(255,217,61,.20);border:1px solid rgba(255,179,0,.38);border-radius:16px;padding:8px 6px;flex:1;justify-content:center;}
+.team-group:last-child{background:rgba(26,125,86,.12);border-color:rgba(26,125,86,.28);}
+.vs-badge{flex:0 0 auto;width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,#FFD93D 0%,#FFB300 100%);color:var(--ink);
+  font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px rgba(255,179,0,.4);}
+
+.player{display:flex;flex-direction:column;align-items:center;gap:5px;width:52px;}
+.player--lg{width:64px;}
+.avatar-wrap{position:relative;width:52px;height:52px;}
+.player--lg .avatar-wrap{width:64px;height:64px;}
+.avatar{width:100%;height:100%;object-fit:contain;display:block;}
+
+.rank-badge{font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap;}
+.rank-badge--1,.rank-badge--4{background:var(--sun);color:var(--ink);}
+.rank-badge--2,.rank-badge--3{background:var(--turf);}
+
+.mood-badge{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;
+  background:#FFF3C4;border:2px solid var(--sun);box-shadow:0 3px 8px rgba(14,41,32,.35);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mood-badge--left{right:auto;left:-14px;}
+.mood-badge--muted{border-color:var(--ink-soft);background:#E4EEE8;}
+.mood-badge img{width:82%;height:82%;object-fit:contain;display:block;}
+
+.num-badge{position:absolute;top:-10px;right:-6px;min-width:28px;height:28px;
+  padding:0 5px;border-radius:50%;background:var(--sun);color:var(--ink);font-weight:900;font-size:13.5px;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,.18);}
+
+.regroup-arrow{display:flex;flex-direction:column;align-items:center;gap:5px;margin:16px 0;color:var(--turf-dark);}
+.regroup-arrow__icon{font-size:22px;line-height:1;font-weight:900;}
+.regroup-arrow__label{font-size:11px;font-weight:800;background:rgba(26,125,86,.12);padding:3px 11px;border-radius:999px;}
+
+.big-number{text-align:center;font-size:46px;font-weight:900;color:var(--turf-dark);line-height:1;margin-top:6px;}
+
+.diff-row{display:flex;align-items:center;justify-content:center;gap:8px;}
+.diff-card{flex:1;text-align:center;background:rgba(255,217,61,.20);border:1px solid rgba(255,179,0,.38);border-radius:14px;
+  padding:16px 4px;font-size:28px;font-weight:900;color:var(--turf-dark);}
+.diff-card:last-child{background:rgba(26,125,86,.12);border-color:rgba(26,125,86,.28);}
+.diff-tag{flex:0 0 auto;font-size:12px;font-weight:800;background:var(--sun);color:var(--ink);
+  padding:8px 11px;border-radius:999px;white-space:nowrap;}
+
+.score-pair{display:flex;justify-content:center;gap:26px;}
+
+.closing-note{display:flex;align-items:center;gap:10px;justify-content:center;
+  background:rgba(255,255,255,.6);border-radius:16px;padding:14px 16px;
+  font-size:13.5px;font-weight:700;color:var(--turf-dark);margin-top:18px;text-align:left;}
+.closing-note img{width:26px;height:26px;object-fit:contain;flex:0 0 auto;}
+
+/* ===== セクション3：スコアが悪くても勝てます（強調） ===== */
+.section--comeback{
+  background:linear-gradient(180deg,rgba(255,217,61,.16) 0%,rgba(255,217,61,0) 60%);
+  border-top:1px solid rgba(26,125,86,.14);border-bottom:1px solid rgba(26,125,86,.14);
+}
+.comeback-text{font-size:14.5px;line-height:1.85;color:var(--ink);margin:0 0 14px;}
+.comeback-text strong{color:var(--turf-dark);background:linear-gradient(transparent 62%,rgba(255,217,61,.55) 0%);}
+.diagram-card--featured{border:2px solid var(--sun);box-shadow:0 14px 34px rgba(255,179,0,.28);
+  padding:24px 16px;margin-top:22px;}
+.supplement{font-size:12.5px;color:var(--ink-soft);opacity:.85;margin-top:16px;text-align:center;}
+
+/* ===== セクション4：ルールを覚える必要はありません ===== */
+.easy-card p{font-size:14px;line-height:1.8;color:var(--ink-soft);margin:0 0 14px;}
+.easy-card p:last-child{margin-bottom:0;}
+
+/* ===== セクション5：ギャラリー ===== */
+.gallery-scroll{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;padding:6px 20px 14px;}
+.gallery-item{flex:0 0 auto;width:250px;height:auto;border-radius:18px;
+  box-shadow:0 10px 26px rgba(14,41,32,.2);scroll-snap-align:center;}
+.gallery-scroll::-webkit-scrollbar{height:5px;}
+.gallery-scroll::-webkit-scrollbar-thumb{background:rgba(14,41,32,.22);border-radius:999px;}
+
+/* ===== セクション6：使い方3ステップ ===== */
+.steps{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--card-bg);
+  border:1px solid rgba(255,255,255,.6);border-radius:18px;padding:16px;box-shadow:var(--shadow-card);}
+.step-num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--turf);color:#fff;
+  font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.step-body{flex:1;font-size:14.5px;line-height:1.7;color:var(--ink);min-width:0;}
+.step-note{display:block;font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.step-icon{width:40px;height:40px;object-fit:contain;margin-top:10px;}
+.step-avatars{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.step-avatar{width:56px;height:56px;object-fit:contain;flex:0 0 auto;}
+
+/* ===== セクション7：作った人 ===== */
+.maker-card{position:relative;padding-top:32px;}
+.maker-card::before{content:'\201C';position:absolute;top:-4px;left:16px;font-size:56px;font-weight:900;
+  color:var(--sun);line-height:1;opacity:.9;}
+.maker-card p{font-size:14.5px;line-height:1.85;color:var(--ink);margin:0 0 12px;}
+.maker-card p:last-child{margin-bottom:0;font-weight:700;color:var(--turf-dark);}
+
+/* ===== セクション8：料金 ===== */
+.price-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:20px;}
+.price-card{position:relative;background:var(--card-bg);border:1px solid rgba(255,255,255,.6);
+  border-radius:18px;padding:20px;box-shadow:var(--shadow-card);}
+.price-card--pro{border:2px solid var(--sun);
+  background:linear-gradient(160deg,rgba(255,217,61,.2),rgba(255,255,255,.72));}
+.price-card__icon{width:40px;height:40px;object-fit:contain;position:absolute;top:16px;right:16px;}
+.price-card__title{font-size:17px;font-weight:900;color:var(--turf-dark);margin:0 0 6px;}
+.price-card__desc{font-size:13.5px;line-height:1.7;color:var(--ink-soft);margin:0;padding-right:24px;}
+.price-note{text-align:center;font-size:11.5px;color:var(--ink-soft);margin:12px 0 0;}
+
+/* ===== セクション9：よくある質問 ===== */
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--card-bg);border:1px solid rgba(255,255,255,.6);border-radius:14px;padding:2px 16px;box-shadow:var(--shadow-card);}
+.faq-item summary{list-style:none;cursor:pointer;padding:14px 0;font-size:14px;font-weight:700;
+  color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-toggle{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:rgba(26,125,86,.12);
+  color:var(--turf-dark);font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.faq-toggle::before{content:'+';}
+.faq-item[open] .faq-toggle::before{content:'\2212';}
+.faq-item p{margin:0 0 16px;font-size:13.5px;line-height:1.75;color:var(--ink-soft);}
+
+/* ===== セクション10：最終CTA＋フッター ===== */
+.section--final{text-align:center;padding-bottom:36px;}
+.site-footer{padding:24px 0 104px;text-align:center;}
+.footer-links{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:0 0 14px;}
+.footer-links a{font-size:12.5px;color:var(--ink-soft);text-decoration:underline;text-underline-offset:3px;}
+.copyright{font-size:11px;color:var(--ink-soft);opacity:.7;}
+
+/* ===== 追従CTAバー ===== */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;
+  padding:10px 20px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,253,245,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:0 -8px 22px rgba(14,41,32,.14);
+  transform:translateY(110%);transition:transform .25s ease;z-index:50;}
+.sticky-cta.is-visible{transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- 1. ヒーロー -->
+<header class="hero" id="hero">
+  <div class="container">
+    <img class="hero__logo" src="assets/wordmark.webp" width="534" height="144" alt="ラスベガス・ゴルフ・ゲーム">
+    <h1 class="hero__title">ゴルフはスコアを競うだけじゃない。</h1>
+    <p class="hero__sub">4人で回るなら、『ラスベガス』という遊び方があります。</p>
+    <a class="btn btn--primary hero__cta" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_hero">App Store で無料ダウンロード</a>
+    <ul class="trust-badges">
+      <li class="trust-badge">全国3,067コース収録</li>
+      <li class="trust-badge">3ラウンドまで無料</li>
+      <li class="trust-badge">iPhone専用</li>
+    </ul>
+  </div>
+  <div class="hero__device-wrap">
+    <img class="hero__device" src="assets/hero-540.webp"
+      srcset="assets/hero-540.webp 540w, assets/hero-1080.webp 1080w"
+      sizes="(max-width:520px) 76vw, 300px"
+      width="540" height="1173" alt="アプリのホーム画面">
+  </div>
+</header>
+
+<main>
+
+  <!-- 2. ラスベガスって、なに？ -->
+  <section class="section" id="what">
+    <div class="container">
+      <h2 class="section-title">ラスベガスって、なに？</h2>
+      <p class="section-lead">4人でラウンドするときの、昔からある遊び方です。覚えることは3つだけ。</p>
+
+      <!-- 図解① 2対2に分かれる -->
+      <div class="diagram-card">
+        <p class="diagram-card__title">① 2対2に分かれる</p>
+        <div class="teams-row">
+          <div class="team-group">
+            <div class="player">
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-1.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="player">
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-2.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <span class="vs-badge">VS</span>
+          <div class="team-group">
+            <div class="player">
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-3.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="player">
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-5.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+        </div>
+        <p class="diagram-card__body">1ホールごとに、4人が2人ずつのチームに分かれます。</p>
+      </div>
+
+      <!-- 図解② 2人のスコアを並べて2桁の数字にする -->
+      <div class="diagram-card">
+        <p class="diagram-card__title">② 2人のスコアを並べて、2桁の数字にする</p>
+        <div class="score-pair">
+          <div class="player player--lg">
+            <div class="avatar-wrap">
+              <img class="avatar" src="assets/ch-1.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <span class="num-badge">4</span>
+            </div>
+          </div>
+          <div class="player player--lg">
+            <div class="avatar-wrap">
+              <img class="avatar" src="assets/ch-2.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <span class="num-badge">5</span>
+            </div>
+          </div>
+        </div>
+        <div class="regroup-arrow"><span class="regroup-arrow__icon">↓</span></div>
+        <p class="big-number">45</p>
+        <p class="diagram-card__body">チーム2人のスコアを並べて2桁の数字に。<strong>小さい方が十の位</strong>です。</p>
+      </div>
+
+      <!-- 図解③ 相手との差がそのホールの点数 -->
+      <div class="diagram-card">
+        <p class="diagram-card__title">③ 相手との差が、そのホールの点数</p>
+        <div class="diff-row">
+          <div class="diff-card">45</div>
+          <span class="diff-tag">差 10</span>
+          <div class="diff-card">55</div>
+        </div>
+        <p class="diagram-card__body">45対55なら差は10。勝ったチームが+10、負けたチームが−10。</p>
+      </div>
+
+      <div class="closing-note">
+        <img src="assets/flag.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
+        <span>これだけです。あとは18ホール繰り返すだけ。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. スコアが悪くても、勝てます。（最重要セクション） -->
+  <section class="section section--comeback" id="comeback">
+    <div class="container">
+      <h2 class="section-title">スコアが悪くても、勝てます。</h2>
+      <p class="comeback-text">このゲームが面白いのは、<strong>チームが1ホールごとに組み替わる</strong>ことです。</p>
+      <p class="comeback-text">しかも——<strong>前のホールで一番スコアが良かった人と、一番悪かった人が同じチーム</strong>になります。</p>
+      <p class="comeback-text">つまり、<strong>叩いた次のホールは、上手い人と組める。</strong></p>
+
+      <!-- 図解④ 組み替わりの仕組み（一番目立たせる） -->
+      <div class="diagram-card diagram-card--featured">
+        <p class="diagram-card__title">④ 組み替わりの仕組み</p>
+
+        <div class="teams-row" style="gap:14px;justify-content:center;">
+          <div class="player">
+            <span class="rank-badge rank-badge--1">1位</span>
+            <div class="avatar-wrap">
+              <img class="avatar" src="assets/ch-1.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <span class="mood-badge mood-badge--left"><img src="assets/ball-birdie.webp" width="200" height="200" alt="" loading="lazy" decoding="async"></span>
+            </div>
+          </div>
+          <div class="player">
+            <span class="rank-badge rank-badge--2">2位</span>
+            <div class="avatar-wrap"><img class="avatar" src="assets/ch-2.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <div class="player">
+            <span class="rank-badge rank-badge--3">3位</span>
+            <div class="avatar-wrap"><img class="avatar" src="assets/ch-3.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <div class="player">
+            <span class="rank-badge rank-badge--4">4位</span>
+            <div class="avatar-wrap">
+              <img class="avatar" src="assets/ch-5.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <span class="mood-badge mood-badge--muted"><img src="assets/ball-bogey.webp" width="200" height="200" alt="" loading="lazy" decoding="async"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="regroup-arrow">
+          <span class="regroup-arrow__icon">↓</span>
+          <span class="regroup-arrow__label">次のホール</span>
+        </div>
+
+        <div class="teams-row">
+          <div class="team-group">
+            <div class="player">
+              <span class="rank-badge rank-badge--1">1位</span>
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-1.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="player">
+              <span class="rank-badge rank-badge--4">4位</span>
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-5.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+          <span class="vs-badge">VS</span>
+          <div class="team-group">
+            <div class="player">
+              <span class="rank-badge rank-badge--2">2位</span>
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-2.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+            <div class="player">
+              <span class="rank-badge rank-badge--3">3位</span>
+              <div class="avatar-wrap"><img class="avatar" src="assets/ch-3.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>
+            </div>
+          </div>
+        </div>
+        <p class="diagram-card__body">1位と4位、2位と3位がペアに。だから叩いた人ほど、上手い人と組めます。</p>
+      </div>
+
+      <p class="comeback-text" style="margin-top:20px;">さらにハンデを設定すれば、実力差はもっと埋まります。<strong>100が切れなくても、勝ち越せる。</strong></p>
+      <p class="supplement">もちろん、バーディが出れば一気に流れが変わります。</p>
+    </div>
+  </section>
+
+  <!-- 4. ルールを覚える必要は、ありません。 -->
+  <section class="section" id="easy">
+    <div class="container">
+      <h2 class="section-title">ルールを覚える必要は、ありません。</h2>
+      <div class="card easy-card">
+        <p>複雑に見えますが、覚えるのはアプリの方です。やることは、いつも通りスコアを入力するだけ。チーム分けも、点数計算も、ハンデの調整も、全部自動です。</p>
+        <p>お金を賭けなくても大丈夫。ポイントだけで十分盛り上がります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 画面ギャラリー -->
+  <section class="section" id="gallery" style="padding-left:0;padding-right:0;">
+    <div class="container">
+      <h2 class="section-title">画面ギャラリー</h2>
+    </div>
+    <div class="gallery-scroll">
+      <img class="gallery-item" src="assets/shot-01.webp" width="720" height="1564" alt="アプリ画面: ホーム" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-02.webp" width="720" height="1564" alt="アプリ画面: コース選択" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-03.webp" width="720" height="1564" alt="アプリ画面: バーディ演出" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-04.webp" width="720" height="1564" alt="アプリ画面: ハンデ設定" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-05.webp" width="720" height="1564" alt="アプリ画面: ラウンド結果" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-06.webp" width="720" height="1564" alt="アプリ画面: スコアボード" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-07.webp" width="720" height="1564" alt="アプリ画面: 統計" loading="lazy" decoding="async">
+      <img class="gallery-item" src="assets/shot-08.webp" width="720" height="1564" alt="アプリ画面: Pro機能" loading="lazy" decoding="async">
+    </div>
+  </section>
+
+  <!-- 6. 使い方は3ステップ -->
+  <section class="section" id="steps">
+    <div class="container">
+      <h2 class="section-title">使い方は3ステップ</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <p>コースを選ぶ<span class="step-note">（全国3,067コース収録。電波がなくても動きます）</span></p>
+            <img class="step-icon" src="assets/cart.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <p>4人の名前とハンデを入れる</p>
+            <div class="step-avatars">
+              <img class="step-avatar" src="assets/ch-1.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <img class="step-avatar" src="assets/ch-2.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <img class="step-avatar" src="assets/ch-3.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+              <img class="step-avatar" src="assets/ch-5.webp" width="240" height="240" alt="" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-num">3</span>
+          <div class="step-body"><p>あとはスコアを入力するだけ</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7. 作った人 -->
+  <section class="section" id="maker">
+    <div class="container">
+      <h2 class="section-title">作った人</h2>
+      <div class="card maker-card">
+        <p>ゴルフ歴20年、プログラミング歴0年。50代です。</p>
+        <p>仲間内で20年ずっとこの遊びをやってきましたが、とにかく計算が大変でした。</p>
+        <p>紙と電卓で1ホールに5分。18ホールで、90分くらい計算しています。</p>
+        <p>『プレーに集中したい』——それだけの理由で、1ヶ月かけて自分で作りました。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 料金 -->
+  <section class="section" id="price">
+    <div class="container">
+      <h2 class="section-title">料金</h2>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3 class="price-card__title">無料</h3>
+          <p class="price-card__desc">3ラウンドまで、全機能を試せます</p>
+        </div>
+        <div class="price-card price-card--pro">
+          <img class="price-card__icon" src="assets/trophy.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
+          <h3 class="price-card__title">Pro</h3>
+          <p class="price-card__desc">ラウンド無制限／履歴の保存／統計ダッシュボード／限定アバター。<strong>初月無料</strong></p>
+        </div>
+      </div>
+      <a class="btn btn--primary btn--block" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_price">App Store で無料ダウンロード</a>
+      <p class="price-note">※最新の料金は App Store でご確認ください</p>
+    </div>
+  </section>
+
+  <!-- 9. よくある質問 -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">よくある質問</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Q. ルールを知らないのですが、大丈夫ですか？<span class="faq-toggle"></span></summary>
+          <p>A. 大丈夫です。計算はアプリがするので、スコアを入れるだけで遊べます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>Q. 4人揃わないと遊べませんか？<span class="faq-toggle"></span></summary>
+          <p>A. ラスベガスは4人1組の遊び方です。3人以下では成立しません。</p>
+        </details>
+        <details class="faq-item">
+          <summary>Q. 電波の届かないコースでも使えますか？<span class="faq-toggle"></span></summary>
+          <p>A. 使えます。全国3,067コースのデータをアプリに内蔵しているので、圏外でも動きます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>Q. お金を賭ける必要がありますか？<span class="faq-toggle"></span></summary>
+          <p>A. ありません。ポイントだけで遊べます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>Q. Androidでも使えますか？<span class="faq-toggle"></span></summary>
+          <p>A. 今のところ iPhone のみです。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 最終CTA -->
+  <section class="section section--final" id="final-cta">
+    <div class="container">
+      <a class="btn btn--primary btn--block" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_footer">App Store で無料ダウンロード</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="https://miyakey01-afk.github.io/Privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+      <li><a href="mailto:miyakey01@gmail.com">お問い合わせ</a></li>
+      <li><a href="https://x.com/nonoririko" target="_blank" rel="noopener">X</a></li>
+    </ul>
+    <p class="copyright">© 2026 ラスベガス・ゴルフ・ゲーム</p>
+  </div>
+</footer>
+
+<!-- 下部追従CTAバー -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn--primary btn--block" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_bar">App Store で無料ダウンロード</a>
+</div>
+
+<script>
+(function () {
+  var hero = document.getElementById('hero');
+  var finalCta = document.getElementById('final-cta');
+  var bar = document.getElementById('stickyCta');
+  if (!hero || !bar || !('IntersectionObserver' in window)) return;
+
+  var heroVisible = true;
+  var finalCtaVisible = false;
+
+  function update() {
+    // ヒーローが画面外 かつ 最終CTAが画面外 のときだけ追従バーを出す
+    // (最終CTAボタンと二重に見えるのを防ぐ)
+    bar.classList.toggle('is-visible', !heroVisible && !finalCtaVisible);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.target === hero) heroVisible = entry.isIntersecting;
+      if (entry.target === finalCta) finalCtaVisible = entry.isIntersecting;
+    });
+    update();
+  }, { threshold: 0 });
+
+  io.observe(hero);
+  if (finalCta) io.observe(finalCta);
+})();
+</script>
+</body>
+</html>
