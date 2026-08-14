@@ -185,6 +185,19 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
   background:linear-gradient(160deg,rgba(255,217,61,.2),rgba(255,255,255,.72));}
 .price-card__icon{width:40px;height:40px;object-fit:contain;position:absolute;top:16px;right:16px;}
 .price-card__title{font-size:17px;font-weight:900;color:var(--turf-dark);margin:0 0 6px;}
+.price-card__head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 6px;}
+.price-card__head .price-card__title{margin:0;}
+.price-card__badge{flex:0 0 auto;font-size:10.5px;font-weight:900;color:var(--ink);
+  background:linear-gradient(135deg,#FFD93D 0%,#FFB300 100%);padding:3px 10px;border-radius:999px;
+  white-space:nowrap;box-shadow:0 3px 8px rgba(255,179,0,.35);}
+.price-card__price{display:flex;align-items:baseline;gap:3px;margin:0 0 4px;}
+.price-card__amount{font-size:26px;font-weight:900;color:var(--turf-dark);line-height:1;}
+.price-card__unit{font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+.price-card__annual{font-size:12.5px;line-height:1.6;font-weight:700;color:var(--ink-soft);
+  margin:0 0 10px;padding-right:24px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.price-card__annual strong{color:var(--turf-dark);}
+.price-card__save{flex:0 0 auto;font-size:10px;font-weight:900;color:var(--turf-dark);
+  background:rgba(26,125,86,.14);padding:2px 8px;border-radius:999px;white-space:nowrap;}
 .price-card__desc{font-size:13.5px;line-height:1.7;color:var(--ink-soft);margin:0;padding-right:24px;}
 .price-note{text-align:center;font-size:11.5px;color:var(--ink-soft);margin:12px 0 0;}
 
@@ -470,16 +483,22 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
       <div class="price-grid">
         <div class="price-card">
           <h3 class="price-card__title">無料</h3>
+          <p class="price-card__price"><span class="price-card__amount">¥0</span></p>
           <p class="price-card__desc">3ラウンドまで、全機能を試せます</p>
         </div>
         <div class="price-card price-card--pro">
           <img class="price-card__icon" src="assets/trophy.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
-          <h3 class="price-card__title">Pro</h3>
-          <p class="price-card__desc">ラウンド無制限／履歴の保存／統計ダッシュボード／限定アバター。<strong>初月無料</strong></p>
+          <div class="price-card__head">
+            <h3 class="price-card__title">Pro</h3>
+            <span class="price-card__badge">初月無料</span>
+          </div>
+          <p class="price-card__price"><span class="price-card__amount">¥300</span><span class="price-card__unit">/月</span></p>
+          <p class="price-card__annual">年額なら<strong>¥3,000/年</strong>（月あたり¥250）<span class="price-card__save">2ヶ月分お得</span></p>
+          <p class="price-card__desc">ラウンド無制限／履歴の保存／統計ダッシュボード／限定アバター</p>
         </div>
       </div>
       <a class="btn btn--primary btn--block" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_price">App Store で無料ダウンロード</a>
-      <p class="price-note">※最新の料金は App Store でご確認ください</p>
+      <p class="price-note">※価格はApp Storeの表示が最新です</p>
     </div>
   </section>
 
