@@ -39,6 +39,8 @@ a{color:inherit;}
 h1,h2,h3,p,ul,ol,li{margin:0;padding:0;line-break:strict;}
 a,button,summary{-webkit-tap-highlight-color:transparent;}
 :focus-visible{outline:3px solid var(--sun);outline-offset:2px;}
+/* Safari(WebKit)は word-break:auto-phrase 非対応のため、分断されると困る語句をこのクラスで保護する */
+.nowrap-ja{display:inline-block;white-space:nowrap;}
 
 /* ===== 共通パーツ ===== */
 .container{padding:0 20px;}
@@ -62,7 +64,8 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
     radial-gradient(ellipse at 50% 0,rgba(255,217,61,.35) 0,transparent 45%),
     linear-gradient(180deg,#7EC8E3 0%,#B8E0D2 38%,#1A7D56 78%,#0E5C3E 100%);
 }
-.hero__logo{width:172px;height:auto;margin:0 auto 18px;display:block;}
+.hero__icon{width:80px;height:80px;margin:0 auto 14px;display:block;border-radius:22%;box-shadow:0 10px 22px rgba(14,41,32,.4),0 0 0 3px rgba(255,255,255,.3);}
+.hero__appname{font-size:13.5px;font-weight:800;letter-spacing:.04em;color:rgba(255,255,255,.94);text-shadow:0 2px 8px rgba(14,41,32,.4);margin:0 0 10px;}
 .hero__title{font-size:25px;line-height:1.45;font-weight:900;color:#fff;
   text-shadow:0 3px 14px rgba(14,41,32,.45);margin:0 0 12px;}
 .hero__sub{font-size:14.5px;line-height:1.75;font-weight:700;color:rgba(255,255,255,.97);
@@ -234,9 +237,10 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
 <!-- 1. ヒーロー -->
 <header class="hero" id="hero">
   <div class="container">
-    <img class="hero__logo" src="assets/wordmark.webp" width="534" height="144" alt="ラスベガス・ゴルフ・ゲーム">
-    <h1 class="hero__title">ゴルフはスコアを競うだけじゃない。</h1>
-    <p class="hero__sub">4人で回るなら、『ラスベガス』という遊び方があります。</p>
+    <img class="hero__icon" src="assets/icon-180.png" width="80" height="80" alt="">
+    <p class="hero__appname">ラスベガス・ゴルフ・ゲーム</p>
+    <h1 class="hero__title">ゴルフはスコアを<span class="nowrap-ja">競うだけじゃない。</span></h1>
+    <p class="hero__sub">4人で回るなら、『ラスベガス』という<span class="nowrap-ja">遊び方があります。</span></p>
     <a class="btn btn--primary hero__cta" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_hero">App Store で無料ダウンロード</a>
     <ul class="trust-badges">
       <li class="trust-badge">全国3,067コース収録</li>
@@ -258,7 +262,7 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
   <section class="section" id="what">
     <div class="container">
       <h2 class="section-title">ラスベガスって、なに？</h2>
-      <p class="section-lead">4人でラウンドするときの、昔からある遊び方です。覚えることは3つだけ。</p>
+      <p class="section-lead">4人でラウンドするときの、昔からある<span class="nowrap-ja">遊び方です。</span><span class="nowrap-ja">覚えることは3つだけ。</span></p>
 
       <!-- 図解① 2対2に分かれる -->
       <div class="diagram-card">
@@ -393,7 +397,7 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
         <p class="diagram-card__body">1位と4位、2位と3位がペアに。だから叩いた人ほど、上手い人と組めます。</p>
       </div>
 
-      <p class="comeback-text" style="margin-top:20px;">さらにハンデを設定すれば、実力差はもっと埋まります。<strong>100が切れなくても、勝ち越せる。</strong></p>
+      <p class="comeback-text" style="margin-top:20px;">さらにハンデを設定すれば、<span class="nowrap-ja">実力差はもっと埋まります。</span><strong class="nowrap-ja">100が切れなくても、勝ち越せる。</strong></p>
       <p class="supplement">もちろん、バーディが出れば一気に流れが変わります。</p>
     </div>
   </section>
@@ -436,7 +440,7 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
         <li class="step">
           <span class="step-num">1</span>
           <div class="step-body">
-            <p>コースを選ぶ<span class="step-note">（全国3,067コース収録。電波がなくても動きます）</span></p>
+            <p>コースを選ぶ<span class="step-note">（全国3,067コース収録。電波がなくても<span class="nowrap-ja">動きます）</span></span></p>
             <img class="step-icon" src="assets/cart.webp" width="160" height="160" alt="" loading="lazy" decoding="async">
           </div>
         </li>
@@ -470,7 +474,7 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
       <div class="card maker-card">
         <p>ゴルフ歴20年、プログラミング歴0年。</p>
         <p>仲間内で20年ずっとこの遊びをやってきましたが、とにかく計算が大変でした。</p>
-        <p>紙と電卓で1ホールに5分。18ホールで、90分くらい計算しています。</p>
+        <p>紙と電卓で1ホールに5分。18ホールで、<span class="nowrap-ja">90分くらい</span>計算しています。</p>
         <p>『プレーに集中したい』——それだけの理由で、1ヶ月かけて自分で作りました。</p>
       </div>
     </div>
@@ -494,7 +498,7 @@ a,button,summary{-webkit-tap-highlight-color:transparent;}
           </div>
           <p class="price-card__price"><span class="price-card__amount">¥300</span><span class="price-card__unit">/月</span></p>
           <p class="price-card__annual">年額なら<strong>¥3,000/年</strong>（月あたり¥250）<span class="price-card__save">2ヶ月分お得</span></p>
-          <p class="price-card__desc">ラウンド無制限／履歴の保存／統計ダッシュボード／限定アバター</p>
+          <p class="price-card__desc">ラウンド無制限／履歴の保存／統計<span class="nowrap-ja">ダッシュボード</span>／限定アバター</p>
         </div>
       </div>
       <a class="btn btn--primary btn--block" href="https://apps.apple.com/jp/app/id6768002657?ct=lp1_price">App Store で無料ダウンロード</a>
